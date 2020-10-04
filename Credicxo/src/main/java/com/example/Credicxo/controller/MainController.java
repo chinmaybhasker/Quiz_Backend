@@ -1,6 +1,7 @@
 package com.example.Credicxo.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,19 +70,22 @@ public class MainController {
 	 	Map<String, String> map = service1.checkUserDetail(l1);
 		return map;
 	 }
-	 
+	 List<Integer> l = new ArrayList<>();
 	 @GetMapping(path="/getHotelDetails") // Map ONLY POST Requests
 		public  ResponseEntity<?> getQuestion (@RequestParam String number) {
 			 try {
-				 List<Integer> l = new ArrayList<>();
+				
 				 if (l.size() == 6) {
 					 l.clear();
 				 }
-				 double x = (Math.random()*((6-1)+1))+1;
-				 l.add((int)x);
+				 double x = Math.random()*(6)+1;
+				 System.out.println("AAAA   "+x);
+				 System.out.println(Arrays.toString(l.toArray()));
 				 while (l.contains((int)x) ) {
 					  x = (Math.random()*((6-1)+1))+1;
+					  System.out.println("BBBB   "+x);
 				 }
+				 l.add((int)x);
 				 QuestionEntity obj = questionRepository.findById((int)x).get();
 				 
 				 Map<String,QuestionEntity> map = new HashMap();
