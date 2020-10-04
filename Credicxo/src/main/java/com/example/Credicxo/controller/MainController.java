@@ -1,5 +1,6 @@
 package com.example.Credicxo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,9 +71,19 @@ public class MainController {
 	 }
 	 
 	 @GetMapping(path="/getHotelDetails") // Map ONLY POST Requests
-		public  ResponseEntity<?> addNewUser (@RequestParam String number) {
+		public  ResponseEntity<?> getQuestion (@RequestParam String number) {
 			 try {
-				 QuestionEntity obj = questionRepository.findById(Integer.parseInt(number)).get();
+				 List<Integer> l = new ArrayList<>();
+				 if (l.size() == 6) {
+					 l.clear();
+				 }
+				 double x = (Math.random()*((6-1)+1))+1;
+				 l.add((int)x);
+				 while (l.contains((int)x) ) {
+					  x = (Math.random()*((6-1)+1))+1;
+				 }
+				 QuestionEntity obj = questionRepository.findById((int)x).get();
+				 
 				 Map<String,QuestionEntity> map = new HashMap();
 				 
 				 map.put("response", obj);
@@ -103,4 +114,16 @@ public class MainController {
 		 List<PerformaceEntity> list = performance.foo();
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	 }
+	 
+	 @GetMapping(path="/BestPerformer") // Map ONLY POST Requests
+		public  ResponseEntity<?> getBestPerformer () {
+			 try {
+				 System.out.println();
+				 List<PerformaceEntity> list = performance.foo();
+					return new ResponseEntity<>(list,HttpStatus.OK);
+			 }
+			 catch(Exception IllegalArgumentException) {
+				return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+			 }
+		 }
 }

@@ -13,7 +13,7 @@ public class PerformaceEntity {
 	  @Column(name = "id", unique = true, nullable = false)
 	  private int id;
 	  
-	@Column
+	@Column(nullable = false)
 	private String emailaddress;
 	public int getId() {
 		return id;
@@ -33,7 +33,7 @@ public class PerformaceEntity {
 	public void setPercentage(Integer percentage) {
 		this.percentage = percentage;
 	}
-	@Column
+	@Column(nullable = false)
 	private Integer percentage;
 
 }
